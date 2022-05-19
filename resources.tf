@@ -1,6 +1,6 @@
 /* module "management_services_virtual_machines" {
   for_each                       = toset(local.resource_locations)
-  source                         = "../Modules/Deployments/Windows_virtual_machine"
+  source                         = "github.com/wesley-trust/tfmodule-windows_virtual_machine"
   service_environment            = terraform.workspace
   service_deployment             = "01"
   service_name                   = var.service_name
@@ -16,7 +16,7 @@
 
 module "management_services_network_peering" {
   for_each                   = toset(local.resource_locations)
-  source                     = "../Modules/Deployments/Network_peering"
+  source                     = "github.com/wesley-trust/tfmodule-network_peering"
   service_environment        = terraform.workspace
   service_deployment         = "01"
   service_name               = var.service_name
@@ -28,7 +28,7 @@ module "management_services_network_peering" {
 module "management_services_traffic_manager" {
   depends_on                                  = [module.management_services_virtual_machines]
   count                                       = var.provision_traffic_manager == true ? 1 : 0
-  source                                      = "../Modules/Deployments/Traffic_manager"
+  source                                      = "github.com/wesley-trust/tfmodule-traffic_manager"
   service_environment                         = terraform.workspace
   service_deployment                          = "01"
   service_name                                = "${var.service_name}-TM"
@@ -41,7 +41,7 @@ module "management_services_traffic_manager" {
 module "management_services_recovery_services" {
   depends_on                                  = [module.management_services_virtual_machines]
   for_each                                    = toset(local.resource_recovery_services_locations)
-  source                                      = "../Modules/Deployments/Recovery_services"
+  source                                      = "github.com/wesley-trust/tfmodule-recovery_services"
   service_environment                         = terraform.workspace
   service_deployment                          = "01"
   service_name                                = "${var.service_name}-RSV"
