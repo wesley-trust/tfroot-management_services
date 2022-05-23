@@ -13,22 +13,44 @@ variable "service_location" {
       "UK South"
     ]
 
+    Prod_BCDR = [
+      "North Central US"
+    ]
+
     Dev = [
       "UK South"
     ]
 
-    BCDR = [
+    Dev_BCDR = [
+      "North Central US"
+    ]
+
+    default = [
+      "UK South"
+    ]
+
+    default_BCDR = [
+      "North Central US"
     ]
   }
+}
+
+variable "service_deployment" {
+  description = "Desired deployment identifier of the service collection of provisioned resources"
+  type        = string
+  default     = "01"
 }
 
 variable "service_traffic_manager_location" {
   description = "The production resource location for traffic manager to deploy"
   type        = map(any)
   default = {
-    Prod = "UK South"
-    Dev  = "UK South"
-    BCDR = null
+    Prod         = "UK South"
+    Prod_BCDR    = null
+    Dev          = "UK South"
+    Dev_BCDR     = null
+    default      = "UK South"
+    default_BCDR = null
   }
 }
 
@@ -40,11 +62,24 @@ variable "service_recovery_services_location" {
       "UK South"
     ]
 
+    Prod_BCDR = [
+      "North Central US"
+    ]
+
     Dev = [
       "UK South"
     ]
 
-    BCDR = [
+    Dev_BCDR = [
+      "North Central US"
+    ]
+
+    default = [
+      "UK South"
+    ]
+
+    default_BCDR = [
+      "North Central US"
     ]
   }
 }
@@ -62,16 +97,28 @@ variable "resource_instance_count" {
   type        = map(any)
   default = {
     Prod = {
-      "ManagementServices" = 1
+      "ManagementServices" = 2
     },
+
+    Prod_BCDR = {
+      "ManagementServices" = 1
+    }
 
     Dev = {
       "ManagementServices" = 1
     },
 
-    BCDR = {
-      "ManagementServices" = 0
+    Dev_BCDR = {
+      "ManagementServices" = 1
     }
+
+    default = {
+      "ManagementServices" = 2
+    },
+
+    default_BCDR = {
+      "ManagementServices" = 1
+    },
   }
 }
 
@@ -83,13 +130,25 @@ variable "resource_recovery_services_instance_count" {
       "ManagementServices" = 1
     },
 
+    Prod_BCDR = {
+      "ManagementServices" = 0
+    }
+
     Dev = {
       "ManagementServices" = 1
     },
 
-    BCDR = {
+    Dev_BCDR = {
       "ManagementServices" = 0
     }
+
+    default = {
+      "ManagementServices" = 1
+    },
+
+    default_BCDR = {
+      "ManagementServices" = 0
+    },
   }
 }
 
@@ -101,11 +160,23 @@ variable "resource_instance_size" {
       "ManagementServices" = "Standard_B1s"
     },
 
+    Prod_BCDR = {
+      "ManagementServices" = "Standard_B1s"
+    }
+
     Dev = {
       "ManagementServices" = "Standard_B1s"
     },
 
-    BCDR = {
+    Dev_BCDR = {
+      "ManagementServices" = "Standard_B1s"
+    }
+
+    default = {
+      "ManagementServices" = "Standard_B1s"
+    }
+
+    default_BCDR = {
       "ManagementServices" = "Standard_B1s"
     }
   }

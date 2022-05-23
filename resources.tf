@@ -2,7 +2,7 @@
   for_each                       = toset(local.resource_locations)
   source                         = "github.com/wesley-trust/tfmodule-windows_virtual_machine"
   service_environment            = terraform.workspace
-  service_deployment             = "01"
+  service_deployment             = var.service_deployment
   service_name                   = var.service_name
   service_location               = each.value
   resource_name                  = local.resource_name
@@ -18,7 +18,7 @@ module "management_services_network_peering" {
   for_each                   = toset(local.resource_locations)
   source                     = "github.com/wesley-trust/tfmodule-network_peering"
   service_environment        = terraform.workspace
-  service_deployment         = "01"
+  service_deployment         = var.service_deployment
   service_name               = var.service_name
   service_location           = each.value
   resource_network_peer      = module.management_services_virtual_machines[each.value]
@@ -30,7 +30,7 @@ module "management_services_traffic_manager" {
   count                                       = var.provision_traffic_manager == true ? 1 : 0
   source                                      = "github.com/wesley-trust/tfmodule-traffic_manager"
   service_environment                         = terraform.workspace
-  service_deployment                          = "01"
+  service_deployment                          = var.service_deployment
   service_name                                = "${var.service_name}-TM"
   service_location                            = local.resource_traffic_manager_location
   resource_name                               = local.resource_name
@@ -43,7 +43,7 @@ module "management_services_recovery_services" {
   for_each                                    = toset(local.resource_recovery_services_locations)
   source                                      = "github.com/wesley-trust/tfmodule-recovery_services"
   service_environment                         = terraform.workspace
-  service_deployment                          = "01"
+  service_deployment                          = var.service_deployment
   service_name                                = "${var.service_name}-RSV"
   service_location                            = each.value
   resource_name                               = local.resource_name
