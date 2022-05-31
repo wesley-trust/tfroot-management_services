@@ -1,6 +1,6 @@
 /* module "management_services_virtual_machines" {
   for_each                       = toset(local.resource_locations)
-  source                         = "github.com/wesley-trust/tfmodule-windows_virtual_machine"
+  source                         = "github.com/wesley-trust/tfmodule-compute"
   service_environment            = terraform.workspace
   service_deployment             = var.service_deployment
   service_name                   = var.service_name
@@ -12,6 +12,7 @@
   resource_dns_servers           = lookup(var.resource_dns_servers, each.value, null)
   provision_public_load_balancer = var.provision_public_load_balancer
   resource_network_role          = var.resource_network_role
+  operating_system_platform      = var.operating_system_platform
 }
 
 module "management_services_network_peering" {
