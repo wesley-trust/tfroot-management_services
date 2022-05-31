@@ -21,7 +21,8 @@ module "management_services_network_peering" {
   service_deployment         = var.service_deployment
   service_name               = var.service_name
   service_location           = each.value
-  resource_network_peer      = module.management_services_virtual_machines[each.value]
+  resource_network_peer      = module.management_services_virtual_machines[each.value].network_name
+  resource_group_peer        = module.management_services_virtual_machines[each.value].resource_group_name
   resource_network_peer_role = var.resource_network_peer_role
 }
 
@@ -49,4 +50,5 @@ module "management_services_recovery_services" {
   resource_name                               = local.resource_name
   resource_recovery_services_instance_count   = local.resource_recovery_services_instance_count
   resource_recovery_services_virtual_machines = module.management_services_virtual_machines[each.value]
-} */
+}
+ */
