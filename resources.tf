@@ -1,4 +1,4 @@
-/* module "management_services_virtual_machines" {
+/* module "management_services" {
   for_each                       = toset(local.resource_locations)
   source                         = "github.com/wesley-trust/tfmodule-compute"
   service_environment            = terraform.workspace
