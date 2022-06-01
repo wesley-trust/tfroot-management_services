@@ -1,4 +1,4 @@
-module "management_services" {
+/* module "management_services" {
   for_each                       = toset(local.resource_locations)
   source                         = "github.com/wesley-trust/tfmodule-compute"
   service_environment            = terraform.workspace
@@ -22,7 +22,7 @@ module "management_services_network_peering" {
   resource_network_peer      = module.management_services[each.value].network_name
   resource_group_peer        = module.management_services[each.value].resource_group_name
   resource_network_peer_role = var.resource_network_peer_role
-}
+} */
 
 /* module "management_services_traffic_manager" {
   depends_on                                  = [module.management_services]
