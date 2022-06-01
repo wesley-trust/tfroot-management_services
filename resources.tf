@@ -24,7 +24,7 @@ module "management_services_network_peering" {
   resource_network_peer_role = var.resource_network_peer_role
 }
 
-module "management_services_traffic_manager" {
+/* module "management_services_traffic_manager" {
   depends_on                                  = [module.management_services]
   count                                       = var.provision_traffic_manager == true ? 1 : 0
   source                                      = "github.com/wesley-trust/tfmodule-traffic_manager"
@@ -36,9 +36,9 @@ module "management_services_traffic_manager" {
   resource_traffic_manager_endpoints          = module.management_services
   resource_traffic_manager_endpoint_type      = var.resource_traffic_manager_endpoint_type
   resource_traffic_manager_endpoint_locations = local.resource_locations
-}
+} */
 
-/* module "management_services_recovery_services" {
+module "management_services_recovery_services" {
   depends_on                                  = [module.management_services]
   for_each                                    = toset(local.resource_recovery_services_locations)
   source                                      = "github.com/wesley-trust/tfmodule-recovery_services"
@@ -49,4 +49,4 @@ module "management_services_traffic_manager" {
   resource_name                               = local.resource_name
   resource_recovery_services_instance_count   = local.resource_recovery_services_instance_count
   resource_recovery_services_virtual_machines = module.management_services[each.value]
-} */
+}
