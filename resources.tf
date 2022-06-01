@@ -34,6 +34,7 @@ module "management_services_traffic_manager" {
   service_location                            = local.resource_traffic_manager_location
   resource_name                               = local.resource_name
   resource_traffic_manager_endpoints          = module.management_services
+  resource_traffic_manager_endpoint_type      = var.resource_traffic_manager_endpoint_type
   resource_traffic_manager_endpoint_locations = local.resource_locations
 }
 

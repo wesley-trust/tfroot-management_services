@@ -248,3 +248,9 @@ variable "resource_network_peer_role" {
   type        = string
   default     = "hub"
 }
+
+variable "resource_traffic_manager_endpoint_type" {
+  description = "Type of Traffic Manager Endpoint"
+  type        = string
+  default     = "Azure_Endpoint"
+}
