@@ -1,6 +1,6 @@
-/* module "management_services" {
+module "management_services" {
   for_each                       = toset(local.resource_locations)
-  source                         = "github.com/wesley-trust/tfmodule-compute?ref=v1-compute
+  source                         = "github.com/wesley-trust/tfmodule-compute?ref=v1-compute"
   service_environment            = terraform.workspace
   service_deployment             = var.service_deployment
   service_name                   = var.service_name
@@ -50,4 +50,3 @@ module "management_services_recovery_services" {
   resource_recovery_services_instance_count   = local.resource_recovery_services_instance_count
   resource_recovery_services_virtual_machines = module.management_services[each.value]
 }
- */
