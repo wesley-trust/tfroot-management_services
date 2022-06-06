@@ -1,6 +1,6 @@
 /* module "management_services" {
   for_each                       = toset(local.resource_locations)
-  source                         = "github.com/wesley-trust/tfmodule-compute"
+  source                         = "github.com/wesley-trust/tfmodule-compute?ref=v1"
   service_environment            = terraform.workspace
   service_deployment             = var.service_deployment
   service_name                   = var.service_name
@@ -17,7 +17,7 @@
 
 module "management_services_network_peering" {
   for_each                   = toset(local.resource_locations)
-  source                     = "github.com/wesley-trust/tfmodule-network_peering"
+  source                     = "github.com/wesley-trust/tfmodule-network_peering?ref=v1"
   service_environment        = terraform.workspace
   resource_network_peer      = module.management_services[each.value].network_name
   resource_group_peer        = module.management_services[each.value].resource_group_name
@@ -27,7 +27,7 @@ module "management_services_network_peering" {
 module "management_services_traffic_manager" {
   depends_on                                  = [module.management_services]
   count                                       = var.provision_traffic_manager == true ? 1 : 0
-  source                                      = "github.com/wesley-trust/tfmodule-traffic_manager"
+  source                                      = "github.com/wesley-trust/tfmodule-traffic_manager?ref=v1"
   service_environment                         = terraform.workspace
   service_deployment                          = var.service_deployment
   service_name                                = "${var.service_name}-TM"
@@ -41,7 +41,7 @@ module "management_services_traffic_manager" {
 module "management_services_recovery_services" {
   depends_on                                  = [module.management_services]
   for_each                                    = toset(local.resource_recovery_services_locations)
-  source                                      = "github.com/wesley-trust/tfmodule-recovery_services"
+  source                                      = "github.com/wesley-trust/tfmodule-recovery_services?ref=v0.9-beta"
   service_environment                         = terraform.workspace
   service_deployment                          = var.service_deployment
   service_name                                = "${var.service_name}-RSV"
