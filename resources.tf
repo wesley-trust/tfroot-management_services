@@ -41,7 +41,7 @@ module "management_services_traffic_manager" {
 module "management_services_recovery_services" {
   depends_on                                  = [module.management_services]
   for_each                                    = toset(local.resource_recovery_services_locations)
-  source                                      = "github.com/wesley-trust/tfmodule-recovery_services?ref=v0.9-beta-recovery_services"
+  source                                      = "github.com/wesley-trust/tfmodule-recovery_services?ref=v0.10-beta-recovery_services"
   service_environment                         = terraform.workspace
   service_deployment                          = var.service_deployment
   service_name                                = "${var.service_name}-RSV"
@@ -49,4 +49,5 @@ module "management_services_recovery_services" {
   resource_name                               = local.resource_name
   resource_recovery_services_instance_count   = local.resource_recovery_services_instance_count
   resource_recovery_services_virtual_machines = module.management_services[each.value]
+  resource_delete_protection_enabled          = var.resource_delete_protection_enabled
 }
