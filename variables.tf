@@ -103,7 +103,7 @@ variable "resource_instance_count" {
   type        = map(any)
   default = {
     Prod = {
-      "ManagementServices" = 2
+      "ManagementServices" = 1
     },
 
     Prod_BCDR = {
@@ -119,7 +119,7 @@ variable "resource_instance_count" {
     }
 
     default = {
-      "ManagementServices" = 2
+      "ManagementServices" = 1
     },
 
     default_BCDR = {
