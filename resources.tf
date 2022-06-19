@@ -1,6 +1,6 @@
 module "management_services" {
   for_each                       = toset(local.resource_locations)
-  source                         = "github.com/wesley-trust/tfmodule-compute?ref=v1.1-compute"
+  source                         = "github.com/wesley-trust/tfmodule-compute?ref=v1.2-compute"
   service_environment            = terraform.workspace
   service_deployment             = var.service_deployment
   service_name                   = var.service_name
@@ -17,12 +17,13 @@ module "management_services" {
 }
 
 module "management_services_network_peering" {
-  for_each                   = toset(local.resource_locations)
-  source                     = "github.com/wesley-trust/tfmodule-network_peering?ref=v1-network_peering"
-  service_environment        = terraform.workspace
-  resource_network_peer      = module.management_services[each.value].network_name
-  resource_group_peer        = module.management_services[each.value].resource_group_name
-  resource_network_peer_role = var.resource_network_peer_role
+  for_each                         = toset(local.resource_locations)
+  source                           = "github.com/wesley-trust/tfmodule-network_peering?ref=v1.1-network_peering"
+  service_environment              = terraform.workspace
+  resource_network_peer            = module.management_services[each.value].network_name
+  resource_group_peer              = module.management_services[each.value].resource_group_name
+  resource_network_peer_deployment = var.resource_network_peer_deployment
+  resource_network_peer_role       = var.resource_network_peer_role
 }
 
 module "management_services_traffic_manager" {
