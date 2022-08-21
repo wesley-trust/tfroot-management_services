@@ -1,4 +1,4 @@
-module "management_services" {
+/* module "management_services" {
   for_each                       = toset(local.resource_locations)
   source                         = "github.com/wesley-trust/tfmodule-compute?ref=v1.2-compute"
   service_environment            = terraform.workspace
@@ -54,3 +54,4 @@ module "management_services_recovery_services" {
   resource_automatic_backups_enabled          = var.resource_automatic_backups_enabled
   resource_delete_protection_enabled          = var.resource_delete_protection_enabled
 }
+ */
